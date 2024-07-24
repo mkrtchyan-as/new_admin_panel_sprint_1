@@ -122,7 +122,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+movies_admin/.env
+sqlite_to_postgres/.env
 .venv
 env/
 venv/
