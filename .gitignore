@@ -123,6 +123,7 @@ celerybeat.pid
 
 # Environments
 movies_admin/.env
+sqlite_to_postgres/.env
 .venv
 env/
 venv/
