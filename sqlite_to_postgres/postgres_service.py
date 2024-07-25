@@ -19,7 +19,7 @@ class PostgresService:
             with conn.cursor() as cursor:
                 dataclass_type = TABLE_TO_CLASS.get(table_name)
                 if dataclass_type is None:
-                    raise ValueError(f'Отсутствует dataclass для таблицы {table_name}')
+                    raise ValueError(f'Missing dataclass for table {table_name}')
 
                 dict_data = [asdict(item) for item in data]
                 columns = ', '.join(dict_data[0].keys())
@@ -37,7 +37,7 @@ class PostgresService:
             with conn.cursor() as cursor:
                 dataclass_type = TABLE_TO_CLASS.get(table_name)
                 if dataclass_type is None:
-                    raise ValueError(f'Отсутствует dataclass для таблицы {table_name}')
+                    raise ValueError(f'Missing dataclass for table {table_name}')
 
                 class_fields = ','.join([x.name for x in fields(dataclass_type)])
                 cursor.execute(

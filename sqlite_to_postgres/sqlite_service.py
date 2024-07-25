@@ -19,7 +19,7 @@ class SqliteService:
             conn.row_factory = sqlite3.Row
             yield conn
         except sqlite3.Error as e:
-            logger.error(f'Не удалось подключиться к базе данных: {e}')
+            logger.error('Cannot connect to sqlite db: %s', e)
         finally:
             conn.close()
 
@@ -36,6 +36,6 @@ class SqliteService:
             rows = cursor.fetchall()
 
             if dataclass_type is None:
-                raise ValueError(f'Отсутствует dataclass для таблицы {table_name}')
+                raise ValueError(f'Missing dataclass for table {table_name}')
 
             return [dataclass_type(*row) for row in rows]

@@ -12,13 +12,13 @@ def import_data():
     for table_name in TABLE_TO_CLASS.keys():
         offset = 0
         while True:
-            logger.info(f'Загрузка данные из {table_name} с оффсетом {offset}')
+            logger.info('Loading data from %s with offset %s', table_name, offset)
             data = sqlite_loader.load_data(table_name, offset)
 
             if not data:
                 break
 
-            logger.info(f'Сохранение данных в {table_name}')
+            logger.info('Saving data to %s', table_name)
             postgres_saver.save_data(table_name, data)
             offset += BATCH_SIZE
 

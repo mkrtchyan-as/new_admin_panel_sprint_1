@@ -88,11 +88,11 @@ class GenreFilmWork(UUIDMixin):
 
     created_at = models.DateTimeField(auto_now_add=True)
     film_work = models.ForeignKey(
-        'FilmWork',
+        FilmWork,
         verbose_name=_('film work'),
         on_delete=models.CASCADE)
     genre = models.ForeignKey(
-        'Genre',
+        Genre,
         verbose_name=_('genre'),
         on_delete=models.CASCADE)
 
@@ -104,13 +104,19 @@ class PersonFilmWork(UUIDMixin):
         verbose_name_plural = _('Film Work Persons')
         unique_together = (('film_work', 'person', 'role'),)
 
+    PERSON_ROLES = [
+        ('actor', _('Actor')),
+        ('director', _('Director')),
+        ('writer', _('Writer')),
+    ]
+
     created_at = models.DateTimeField(auto_now_add=True)
-    role = models.TextField(_('role'))
+    role = models.TextField(_('role'), choices=PERSON_ROLES)
     film_work = models.ForeignKey(
-        'FilmWork',
+        FilmWork,
         verbose_name=_('film work'),
         on_delete=models.CASCADE)
     person = models.ForeignKey(
-        'Person',
+        Person,
         verbose_name=_('person'),
         on_delete=models.CASCADE)
