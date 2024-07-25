@@ -30,7 +30,7 @@ def compare_data(sqlite_data: List[object], postgres_data: List[object], table_n
 
     for i, sqlite_data_tuple in enumerate(sqlite_data_tuples):
         assert sqlite_data_tuple == postgres_data_tuples[
-            i], f'Данные не совпадают в таблице {table_name}, \n{sqlite_data_tuple}, \n{postgres_data_tuples[i]}'
+            i], f'Differences found in {table_name}, \n{sqlite_data_tuple}, \n{postgres_data_tuples[i]}'
 
 
 def check_data_consistency():
@@ -40,12 +40,12 @@ def check_data_consistency():
     tables = TABLE_TO_CLASS.keys()
 
     for table in tables:
-        logger.info(f'Сравнение данных в таблице {table}...')
+        logger.info('Comparing data in table %s...', table)
         sqlite_data = get_data_from_database(sqlite_loader, table)
         postgres_data = get_data_from_database(postgres_loader, table)
         compare_data(sqlite_data, postgres_data, table)
 
-    logger.info('Тестирование завершено успешно!')
+    logger.info('Success. No differences found.')
 
 
 if __name__ == '__main__':
