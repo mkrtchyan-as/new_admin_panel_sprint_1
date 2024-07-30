@@ -15,9 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from debug_toolbar.toolbar import debug_toolbar_urls
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+from movies_admin.config.settings import STATIC_ROOT, STATIC_URL
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-] + debug_toolbar_urls()
+] + debug_toolbar_urls() + static(STATIC_URL, document_root=STATIC_ROOT)
